@@ -12,7 +12,7 @@ export default class DeathInTime extends BaseScript {
     tick() {
 
         if (this.timeNow >= this.timeMax) {
-            this.unit.team.statistics.deadAfterTime({unit: this.unit})
+            //this.unit.team.statistics.deadAfterTime({unit: this.unit})
             this.unit.status.dead = true;
         }
         this.timeNow++;

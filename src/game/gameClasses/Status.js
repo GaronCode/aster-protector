@@ -21,7 +21,7 @@ export default class Status {
         this.hpBar(this.nowHP / this.maxHP)
         if (v > 0) this._nowHP = v;
         else {
-            this.unit.team.statistics.dead({unit: this.unit})
+            
             this.dead = true;
         }
     }

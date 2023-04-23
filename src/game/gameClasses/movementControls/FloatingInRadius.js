@@ -1,4 +1,4 @@
-import Victor from "victor";
+
 import Lib from "../Lib";
 import BaseScript from "./BaseScript";
 import FloatToTarget from "./FloatToTarget"
@@ -23,7 +23,7 @@ export default class FloatingInRadius extends BaseScript {
 
         sx = Lib.intRange(0, this.radius * 100) / 100
         sy = Math.sqrt(this.radius * this.radius - sx * sx);
-        
+
         this.dotX = this.x + (Lib.intRange(1, 2) === 1 ? sx : sx * (-1))
         this.dotY = this.y + (Lib.intRange(1, 2) === 1 ? sy : sy * (-1))
     }
@@ -31,16 +31,16 @@ export default class FloatingInRadius extends BaseScript {
     start() {
         this.setDot()
         this.isStarted = true;
-        
+
         this.unit.addControlScript(new FloatToTarget({
             unit: this.unit,
             x: this.dotX,
             y: this.dotY,
             speed: this.speed,
             afterScript: () => {
-                        this.isStarted = false;
-        
-                    }
+                this.isStarted = false;
+
+            }
         }))
 
         // this.setDot();

@@ -1,13 +1,12 @@
 import BaseFireable from "../../gameClasses/elementsClass/BaseFireable"
-import UserControl from "../../gameClasses/movementControls/UserControl.js";
-import DeathInTime from "../../gameClasses/movementControls/DeathInTime.js";
-import gBox from "../../shapes.js";
+//import UserControl from "../../gameClasses/movementControls/UserControl.js";
+import gBox from "../../gameClasses/shapes.js";
 import LightPlasmaPellet from "../bullets/LightPlasmaPellet.js";
 import Lib from "../../gameClasses/Lib.js";
 import FireInterval from "../../gameClasses/movementControls/FireInterval";
 
 
-export default class ShotGunMk1 extends BaseFireable {
+export default class ShotGun extends BaseFireable {
 
     static specs = {
         unitName: "Shot Gun Mk1",
@@ -17,20 +16,23 @@ export default class ShotGunMk1 extends BaseFireable {
         Bullet: LightPlasmaPellet,
         accuracy: Math.PI / 4,
         bulletsPerShot: 5,
+        fireInterval: 60,
         hp: 25
     }
 
-    constructor({ x, y }) {
-        super(ShotGunMk1.specs)
+    constructor(data) {
+        const Final = Object.assign({}, ShotGun.specs, data?data:undefined)
 
-        this.pills = ShotGunMk1.specs.bulletsPerShot;
-        this.shotGunRange = ShotGunMk1.specs.accuracy;
+        super(Final)
+
+        this.pills = Final.bulletsPerShot;
+        this.shotGunRange = Final.accuracy;
 
 
 
 
-        this.addControlScript(new UserControl({ unit: this }))
-        this.addControlScript(new FireInterval({ unit: this, time: 60 }))
+       // this.addControlScript(new UserControl({ unit: this }))
+        this.addControlScript(new FireInterval({ unit: this, time: Final.fireInterval }))
 
     }
 

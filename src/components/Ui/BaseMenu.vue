@@ -3,7 +3,9 @@
         <div class="menu__header"><div class="container" @click="$emit('headerClick')">{{ headerText }}</div></div>
         <div class="menu__body">
             <ul>
-                <li v-for="(item, index) in menuOptions" :key="index"><a href="!#" @click="$emit('menuClick', index)">{{item.text}}</a></li>
+                <li v-for="(item, index) in menuOptions" :key="index" >
+                    <a href="!#" @click="$emit('menuClick', index)" class="button" :class="item.disabled?'disabled':'active'">{{item.text?item.text:item}}</a>
+                </li>
             </ul>
         </div>
         <div class="menu__back"><a class="container" @click="$emit('footerClick')">{{ footerText }}</a></div>
@@ -13,10 +15,10 @@
 export default {
     name: "base-menu",
     props: {
-        headerText: { type: String, default: "подготовка" },
+        headerText: { type: String, default: "заголовок" },
         footerText: { type: String, default: "назад" },
         menuOptions: {
-            type: Array, default: new Array({ text: "выбор формации" }, { text: "оснащение" }, { text: "строительство" }, { text: "исследования" })
+            type: Object,
         }
     }
 
@@ -52,28 +54,38 @@ $base64bg: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAABtCAYAAAD9Lg
 
         & li {
             list-style-type: none;
-        }
 
-        & a {
-            display: block;
-            text-decoration: none;
-            color: inherit;
+            & .button {
+                display: block;
+                text-decoration: none;
+                color: inherit;
+                border-radius: $borderRadius;
+                padding: 26px;
+                margin: 10px 0;
+                text-align: center;
+            }
 
-            cursor: pointer;
-            border-radius: $borderRadius;
-            padding: 26px;
-            margin: 10px 0;
-            text-align: center;
-            background-color: rgba($baseColorMod, .5);
+            & .active {
+                cursor: pointer;
+                background-color: rgba($baseColorMod, .5);
 
-            &:hover {
-                background-color: rgba($hoveredBaseColor, .7);
+                &:hover {
+                    background-color: rgba($hoveredBaseColor, .7);
 
-                background-image: $base64bg;
+                    background-image: $base64bg;
 
-                color: $hoveredTextColor;
+                    color: $hoveredTextColor;
+                }
+            }
+
+            & .disabled {
+                background-color: rgba($baseColorMod, .3);
+                color: rgba($hoveredTextColor, .8);
+                cursor: no-drop;
             }
         }
+
+
     }
 
     &__header,

@@ -1,7 +1,8 @@
-import Unit from "./BaseUnit";
+import BaseUnit from "@/game/gameClasses/elementsClass/BaseUnit";
 
 
-export default class FireableUnit extends Unit {
+
+export default class FireableUnit extends BaseUnit {
     constructor(data) {
         super(data);
         const Bullet = data.Bullet;
@@ -15,6 +16,6 @@ export default class FireableUnit extends Unit {
         this.team.addMember({
             member: bullet
         })
-
+        
     }
 }

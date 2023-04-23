@@ -2,13 +2,12 @@ import Victor from "victor";
 import BaseScript from "./BaseScript";
 
 export default class MoveThroughTarget extends BaseScript {
-    constructor({ unit, x, y, speed, rotationSpeed }) {
+    constructor({ unit, x, y, speed }) {
         super();
         this.unit = unit;
         this.x = x;
         this.y = y;
         this.speed = speed;
-        this.rotationSpeed = rotationSpeed ? rotationSpeed : 0.01;
 
     }
 

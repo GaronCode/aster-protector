@@ -1,4 +1,4 @@
-import { gCircle } from "@/game/shapes"
+import { gCircle } from "@/game/gameClasses/shapes"
 import BaseBullet from "../../gameClasses/elementsClass/BaseBullet"
 
 
@@ -11,8 +11,9 @@ export default class LightPlasma extends BaseBullet {
         speed: 15,
         damage: 12
     }
-    constructor({ fieredUnit}) {
-        super(Object.assign({fieredUnit}, LightPlasma.specs));
+    constructor(data) { // нужен ключ fieredUnit
+        
+        super(Object.assign({}, LightPlasma.specs,data));
     }
 
     

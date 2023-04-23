@@ -1,4 +1,4 @@
-import BaseBullet from "./elementsClass/BaseBullet";
+//import BaseBullet from "./elementsClass/BaseBullet";
 
 export default class TeamStatistics {
     constructor(team) {
@@ -10,43 +10,43 @@ export default class TeamStatistics {
 
         this.damage = {}
     }
-    test(a) {
-        this.html = a
-    }
+    // test(a) {
+    //     this.html = a
+    // }
 
-    dead({ unit }) {
-        if (!(unit instanceof BaseBullet)) {
-            this.lostUnits++
-        }
-        this.updateOutput()
-    }
-    deadAfterTime({ unit }) {
-        if (!(unit instanceof BaseBullet)) {
-            this.lostAfterTime++
-        }
-        
-        this.updateOutput()
-    }
+    // dead({ unit }) {
+    //     if (!(unit instanceof BaseBullet)) {
+    //         this.lostUnits++
+    //     }
+    //     this.updateOutput()
+    // }
+    // deadAfterTime({ unit }) {
+    //     if (!(unit instanceof BaseBullet)) {
+    //         this.lostAfterTime++
+    //     }
 
-    dealDamage({ unit, damage }) {
-        if (this.damage[unit.name] === undefined) {
-            this.damage[unit.name] = 0;
-        }
-        this.damage[unit.name] += damage
-        this.updateOutput()
-    }
+    //     this.updateOutput()
+    // }
+
+    // dealDamage({ unit, damage }) {
+    //     if (this.damage[unit.name] === undefined) {
+    //         this.damage[unit.name] = 0;
+    //     }
+    //     this.damage[unit.name] += damage
+    //     this.updateOutput()
+    // }
 
 
-    updateOutput() {
-        let text = ""
-        for (const key in this.damage) {
-            if (Object.hasOwnProperty.call(this.damage, key)) {
-                text += `[${key}]: ${this.damage[key]} `
-            }
-        }
-        text += `lost units: ${this.lostUnits - this.lostAfterTime}, passed units: ${this.lostAfterTime}`
-        this.html.innerText = text
-    }
+    // updateOutput() {
+    //     // let text = ""
+    //     // for (const key in this.damage) {
+    //     //     if (Object.hasOwnProperty.call(this.damage, key)) {
+    //     //         text += `[${key}]: ${this.damage[key]} `
+    //     //     }
+    //     // }
+    //     // text += `lost units: ${this.lostUnits - this.lostAfterTime}, passed units: ${this.lostAfterTime}`
+    //     // this.html.innerText = text
+    // }
 
 
 }

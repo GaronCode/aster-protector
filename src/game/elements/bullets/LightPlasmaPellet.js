@@ -1,4 +1,4 @@
-import { gCircle } from "@/game/shapes"
+import { gCircle } from "@/game/gameClasses/shapes"
 import BaseBullet from "../../gameClasses/elementsClass/BaseBullet"
 
 

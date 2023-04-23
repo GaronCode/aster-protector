@@ -1,7 +1,7 @@
 import BaseUnit from "../../gameClasses/elementsClass/BaseUnit.js"
 import DeathInTime from "../../gameClasses/movementControls/DeathInTime.js";
-import gBox from "../../shapes.js";
-import { gCircle } from "../../shapes.js";
+import gBox from "../../gameClasses/shapes.js";
+import { gCircle } from "../../gameClasses/shapes.js";
 import Lib from "../../gameClasses/Lib.js"
 import BaseBullet from "../../gameClasses/elementsClass/BaseBullet.js";
 

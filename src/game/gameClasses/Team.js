@@ -86,5 +86,10 @@ export default class Team extends Lib {
         );
     }
 
+
+    get count() {
+        return this.members.length
+    }
+
     
 }

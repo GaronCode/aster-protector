@@ -1,4 +1,3 @@
-import BaseBullet from "./elementsClass/BaseBullet.js";
 import Lib from "./Lib.js"
 
 export default class Tick extends Lib {
@@ -7,6 +6,10 @@ export default class Tick extends Lib {
         this.app = app;
         this.teams = []
 
+        this.scripts = {
+            before: [],
+            after: []
+        }
     }
 
 
@@ -22,6 +25,14 @@ export default class Tick extends Lib {
 
     }
 
+    addBeforeScript(fx) {
+        this.scripts.before.push(fx)
+    }
+
+    addAfterScript(fx) {
+        this.scripts.after.push(fx)
+    }
+
     start() {
         this.app.ticker.add((data) => {
             this.oneTick(data)
@@ -29,18 +40,21 @@ export default class Tick extends Lib {
     }
 
     stop() {
-        this.app.ticker.stop() 
+        this.app.ticker.stop()
     }
 
-    oneTick(data) {
-        this.forEachUnit((team, member)=>{
+    oneTick(/* data */) {
+        Tick.activateScriptsInArr(this.scripts.before)
+
+        this.forEachUnit((team, member) => {
             if (!member._isRendered()) {
+                //console.log(member);
                 //this.printLog("Element " + member.name + " add to renderer")
                 this.app.stage.addChild(member._getRenderObj());
                 member.prepareScripts({})
             }
 
-            
+
             this.inRadius(member)
 
 
@@ -57,9 +71,9 @@ export default class Tick extends Lib {
 
 
         })
-        
 
 
+        Tick.activateScriptsInArr(this.scripts.after)
     }
 
     forEachUnit(func) {
@@ -71,16 +85,20 @@ export default class Tick extends Lib {
     }
 
     inRadius(unit) {
-        this.forEachUnit((team, anotherUnit)=>{
+        this.forEachUnit((team, anotherUnit) => {
             if (unit === anotherUnit) return
             let x1 = Math.abs(unit.position.x - anotherUnit.position.x),
                 y1 = Math.abs(unit.position.y - anotherUnit.position.y);
 
-                
-            if (Math.sqrt(x1*x1 + y1*y1) < (unit.collisionRadius + anotherUnit.collisionRadius)) {
-                
+
+            if (Math.sqrt(x1 * x1 + y1 * y1) < (unit.collisionRadius + anotherUnit.collisionRadius)) {
+
                 unit.collisionFx(anotherUnit)
             }
         })
+    }
+
+    static activateScriptsInArr(arr) {
+        arr.forEach(e =>  e())
     }
 }

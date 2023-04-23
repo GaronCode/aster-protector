@@ -1,6 +1,6 @@
 import { createStore } from 'vuex'
 import AllUnits from '@/game/elements/AllUnits'
-
+import AllWeapons from '@/game/elements/AllWeapons'
 export default createStore({
   state: {
     player: {
@@ -17,10 +17,16 @@ export default createStore({
     },
     gameElements: {
       stantions: AllUnits,
-      weapons: ""
+      weapons: AllWeapons,
     }
   },
   getters: {
+    allStantions(state) {
+      return state.gameElements.stantions
+    },
+    allWeapons(state) {
+      return state.gameElements.weapons
+    }
   },
   mutations: {
   },

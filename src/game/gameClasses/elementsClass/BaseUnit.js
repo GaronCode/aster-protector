@@ -1,6 +1,5 @@
 import { Container, Sprite, Texture } from 'pixi.js'
-
-import Lib from "@/game/gameClasses/Lib.js";
+import Lib from "@/game/gameClasses/Lib";
 import Team from "@/game/gameClasses/Team.js"
 import BaseScript from "@/game/gameClasses/movementControls/BaseScript.js";
 import AbsolutePosition from "@/game/gameClasses/AbsolutePosition.js";
@@ -9,9 +8,10 @@ import Status from "@/game/gameClasses/Status.js";
 
 export default class BaseUnit extends Lib {
 
-    constructor({ unitName, Shape, size, textureName, useHpBar, mainUnit, hp }) {
+    constructor(data) {
+        let { unitName, Shape, size, textureName, useHpBar, mainUnit, hp } = data
         super({ errName: "Unit " + unitName })
-
+        //alert("name: "+unitName +"\nShape: " +Shape+"   \nsize: "+size+"\n textureName: " +textureName+"\n useHpBar: " +useHpBar+"\n mainUnit: " + mainUnit+"\n hp: " + hp)
         this.shape = new Shape(size, textureName)
         let container = new Container();
 
@@ -27,11 +27,12 @@ export default class BaseUnit extends Lib {
         // let bg = new Sprite(Texture.WHITE);
         // bg.width = container.width;
         // bg.height = container.height;
-        // bg.alpha = 0;
+        // bg.alpha = 1;
         // bg.zIndex = 100;
-
         // container.addChild(bg);
         // this.bgItem = bg;
+
+        if (hp === undefined) hp = 1;
         let hpBar = () => { }
         if (useHpBar) {
             let z = new Sprite(Texture.WHITE);
@@ -61,6 +62,7 @@ export default class BaseUnit extends Lib {
 
         this.team;
         this.name = unitName;
+        this.size = size;
         this.weapons = []
         this.status = new Status(hpBar, this);
         this.status.maxHP = hp;
@@ -146,7 +148,7 @@ export default class BaseUnit extends Lib {
 
     }
     setMainUnit(unit) {
-        if (this.checkClass(unit, BaseUnit, "setMainUnit")) {
+        if (this.checkClass(unit, this, "setMainUnit")) {
             this.mainUnit = unit
             this.absolutePosition = new AbsolutePosition(this);
         }

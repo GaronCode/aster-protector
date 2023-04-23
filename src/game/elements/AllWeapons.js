@@ -1,16 +1,17 @@
-import LightGun from "./weapons/LightGun";
+import Gun from "./weapons/Gun";
 
-function Weapon(WeaponClass) {
-   this.name = WeaponClass.BaseGunName;
-   this.size = WeaponClass.BaseGunSize
-   this.hp = WeaponClass.BaseGunHP
-   this.bullet = WeaponClass.BaseGunBulletClass
-   this.create = (a)=> new WeaponClass(a)
+function Weapon(WeaponClass, WeaponData) {
+
+   this.specs = Object.assign({},WeaponClass.specs,WeaponData)
+   
+   this.bulletSpecs = this.specs.Bullet.specs
+
+   this.create = ()=> new WeaponClass(WeaponData)
 }
 
 
 const AllUnits = {
-   lg01: new Weapon(LightGun),
+   lg01: new Weapon(Gun, {unitName: "Light Gun Mk1" ,size: 70, fireInterval: 25 }),
 }
 
 
