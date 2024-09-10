@@ -31,6 +31,7 @@
       z-index="1"
     />
     <div class="building-menu__show-container">
+    <user-resources-list></user-resources-list>
       <transition name="fade">
         <div
           v-if="checkedUnitId !== null"
@@ -49,6 +50,7 @@
   </div>
 </template>
 <script>
+import UserResourcesList from "@/components/Ui/UserResourcesList";
 import VerticalMenu from "../VerticalMenu.vue";
 import ShowingUnit from "@/components/ViewPixi/ShowingUnit.vue";
 export default {
@@ -56,6 +58,7 @@ export default {
   components: {
     VerticalMenu,
     ShowingUnit,
+    UserResourcesList
   },
   data() {
     return {
