@@ -5,12 +5,11 @@ export class BaseResource {
     img = "./img/bullet.png";
 
     #amount = 0;
-    #refAmount= ref(0);
+    refAmount= ref(0);
 
     constructor({
         name, imgUrl, amount,
                 }) {
-
         this.name = name;
 
         if (amount) this.amount = amount;
@@ -26,7 +25,7 @@ export class BaseResource {
     set amount(val) {
         if (val >= 0) {
             this.#amount = val;
-            this.#refAmount.value = val;
+            this.refAmount.value = val;
         } else {
             throw {message: 'must be positive number!', name: 'must be positive'}
         }
@@ -48,6 +47,6 @@ export class BaseResource {
      }
 
      getRef() {
-        return this.#refAmount;
+        return this.refAmount;
      }
 }
